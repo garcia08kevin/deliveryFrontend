@@ -1,0 +1,62 @@
+<form>
+    <div class="mb-3">
+        <label for="email" class="form-label">Descripcion</label>
+      <input type="text" class="form-control" [(ngModel)]="descripcion" name="Descripcion"> 
+    </div>
+    <div class="mb-3">
+        <label for="clave" class="form-label">Fecha de entrega</label>
+        <input [formControl]="dateObjectControl" class="form-control"  type="date" id="date-object" [(ngModel)]="fechaEntrega"  name="fechaEntrega" />
+    </div>
+    <div class="mb-3">
+      <label  *ngIf="!Actualizar" for="tamanioPaqueteId" class="form-label">Tamaño del Paquete</label>
+      <select  class="form-control" name="tamanioPaqueteId" id="tamanioPaqueteId" [(ngModel)]="tamanioPaqueteId" *ngIf="pedido.id==0">
+        <option *ngFor="let type of tamanioList$|async" [value]="type.id">{{type.tamanio}}</option>
+      </select>
+  </div>
+    <div class="mb-3">
+      <label  *ngIf="Actualizar" for="tamanioPaqueteId" class="form-label">Tamaño del Paquete</label>
+      <select  class="form-control" name="tamanioPaqueteId" id="tamanioPaqueteId" [(ngModel)]="tamanioPaqueteId" *ngIf="pedido.id!=0">
+        <option *ngFor="let type of tamanioList$|async" [value]="type.id">{{type.tamanio}}</option>
+      </select>
+  </div>
+  <div class="mb-3">
+    <label  *ngIf="!Actualizar" for="estadoPaqueteId" class="form-label">Estado</label>
+    <select  class="form-control" name="estadoPaqueteId" id="estadoPaqueteId" [(ngModel)]="estadoPaqueteId" *ngIf="pedido.id==0" disabled>
+      <option *ngFor="let type of estadoList$|async" [value]="type.id">{{type.paquete}}</option>
+    </select>
+</div>
+  <div class="mb-3">
+    <label  *ngIf="Actualizar" for="estadoPaqueteId" class="form-label">Estado</label>
+    <select  class="form-control" name="estadoPaqueteId" id="estadoPaqueteId" [(ngModel)]="estadoPaqueteId" *ngIf="pedido.id!=0">
+      <option *ngFor="let type of estadoList$|async" [value]="type.id">{{type.paquete}}</option>
+    </select>
+</div>
+    <div class="mb-3">
+        <label for="text" class="form-label">Fragilidad 1-10</label>
+      <input type="number" class="form-control" [(ngModel)]="nivelFragilidad" name="Entregado"> 
+    </div>
+    <div class="mb-3">
+      <label  *ngIf="!Actualizar" for="ciudad" class="form-label">Ciudad</label>
+      <select (click)="mostrarClientesPorCiudad()"  class="form-control" name="clienteId" id="clienteId" [(ngModel)]="ciudadId" *ngIf="pedido.id==0">
+        <option  *ngFor="let type of ciudadList" [value]="type.id">{{type.nombre}}</option>
+      </select>
+  </div>
+    <div class="mb-3">
+      <label  *ngIf="!Actualizar" for="clienteId" class="form-label">Cliente</label>
+      <select  class="form-control" name="clienteId" id="clienteId" [(ngModel)]="clienteId" *ngIf="pedido.id==0">
+        <option *ngFor="let type of clienteList" [value]="type.id">{{type.nombre}} {{type.apellido}}</option>
+      </select>
+  </div>
+    <div class="mb-3">
+      <label  *ngIf="Actualizar" for="clienteId" class="form-label">Cliente</label>
+      <select  class="form-control" name="clienteId" id="clienteId" [(ngModel)]="clienteId" *ngIf="pedido.id!=0" disabled>
+        <option *ngFor="let type of clienteList$|async" [value]="type.id">{{type.nombre}}</option>
+      </select>
+  </div>
+    <button (click)="agregarPedido()" *ngIf="pedido.id==0" class="btn btn-primary">
+        Agregar
+    </button>
+    <button (click)="actualizarPedido()" *ngIf="pedido.id!=0" class="btn btn-primary">
+        Actualizar
+    </button>
+</form>

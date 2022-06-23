@@ -1,0 +1,17 @@
+<form>
+    <div class="mb-3">
+        <label for="vehiculoId" class="form-label">Vehiculo</label>
+        <select class="form-control" name="vehiculoId" id="vehiculoId" [(ngModel)]="vehiculoId" *ngIf="user.id!=0">
+          <option *ngFor="let type of vehiculoList$|async" [value]="type.id">{{type.tipo}}</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="ciudadId" class="form-label">Ciudad</label>
+        <select class="form-control" name="ciudadId" id="ciudadId" [(ngModel)]="ciudadId" *ngIf="user.id!=0">
+          <option *ngFor="let type of cuidadList$|async" [value]="type.id">{{type.nombre}}</option>
+        </select>
+    </div>
+    <button (click)="updateUser()" *ngIf="user.id!=0" class="btn btn-primary">
+        Actualizar
+    </button>
+</form>

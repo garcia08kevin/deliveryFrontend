@@ -1,0 +1,44 @@
+<form>
+    <div class="mb-3">
+        <label for="email" class="form-label">Nombre</label>
+      <input type="text" class="form-control" [(ngModel)]="nombre" name="nombre"> 
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Apellido</label>
+      <input type="text" class="form-control" [(ngModel)]="apellido" name="apellido"> 
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Telefono</label>
+      <input type="text" class="form-control" [(ngModel)]="telefono" name="telefono"> 
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Cedula</label>
+      <input type="text" class="form-control" [(ngModel)]="cedula" name="cedula"> 
+    </div>    
+    <div class="mb-3">
+      <label  *ngIf="!Actualizar" for="ciudadId" class="form-label">Ciudad</label>
+      <select  class="form-control" name="ciudadId" id="ciudadId" [(ngModel)]="cuidadId" *ngIf="cliente.id==0">
+        <option *ngFor="let type of ciudadList$|async" [value]="type.id">{{type.nombre}}</option>
+      </select>
+  </div>
+    <div class="mb-3">
+      <label  *ngIf="Actualizar" for="ciudadId" class="form-label">Ciudad</label>
+      <select  class="form-control" name="ciudadId" id="ciudadId" [(ngModel)]="cuidadId" *ngIf="cliente.id!=0">
+        <option *ngFor="let type of ciudadList$|async" [value]="type.id">{{type.nombre}}</option>
+      </select>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Barrio</label>
+  <input type="text" class="form-control" [(ngModel)]="barrio" name="Barrio"> 
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Direccion</label>
+  <input type="text" class="form-control" [(ngModel)]="direccion" name="direccion"> 
+  </div>
+    <button (click)="agregarCliente()" *ngIf="cliente.id==0" class="btn btn-primary">
+        Agregar
+    </button>
+    <button (click)="actualizarCliente()" *ngIf="cliente.id!=0" class="btn btn-primary">
+        Actualizar
+    </button>
+</form>
