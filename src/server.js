@@ -3,10 +3,7 @@ let express = require('express');
 
 let app = express();
 
-app.use(express.static(__dirname+'/dist/angular-biblioteca'));
-
-app.get('/*', (req, resp) =>{
-    resp.sendFile(__dirname+'dist/angular-biblioteca/index.html');
-});
+app.use(express.static(path.join(__dirname, 'dist','app_name')));
+res.sendFile(path.join(__dirname,'dist','app_name','index.html'));
 
 app.listen(process.env.PORT || 8080);
